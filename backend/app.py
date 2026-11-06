@@ -1,4 +1,3 @@
-"""Acervo - API REST (versión con endurecimiento de seguridad)."""
 import logging, os, secrets, time
 from contextlib import contextmanager
 from datetime import date, timedelta
@@ -9,6 +8,8 @@ from flask import Flask, jsonify, request, session
 from werkzeug.exceptions import HTTPException
 from werkzeug.security import check_password_hash, generate_password_hash
 import logic
+from dotenv import load_dotenv
+load_dotenv()
 
 PROD = os.getenv("ACERVO_ENV", "development") == "production"
 MAX_INTENTOS, BLOQUEO = 5, 300           # 5 fallos de login -> bloqueo de 5 minutos (por IP + usuario)
@@ -87,7 +88,7 @@ def create_app():
     err = lambda m, c=400: (jsonify(error=m), c)
     B = ("Bibliotecaria",)
 
-    # ---------- Seguridad transversal ----------
+    
     @app.before_request
     def _csrf():  # una cabecera personalizada obliga al navegador a hacer preflight CORS: bloquea CSRF entre sitios
         if request.method in ("POST", "PUT", "PATCH", "DELETE") and request.headers.get("X-Requested-With") != "acervo":
@@ -129,7 +130,7 @@ def create_app():
     def upd(table, idc, i, d):
         if d: run(f"UPDATE {table} SET {','.join(c+'=%s' for c in d)} WHERE {idc}=%s", [*d.values(), i], write=True)
 
-    # ---------- Autenticación (CU01) ----------
+    #  Autenticación (CU01) 
     @app.post("/api/login")
     def login():
         d = body()
@@ -157,7 +158,7 @@ def create_app():
     @auth()
     def me(): return jsonify(nombre=session["nombre"], rol=session["rol"])
 
-    # ---------- Dashboard (CU10) ----------
+    #  Dashboard (CU10) 
     def vencidos(lim=500, tel=False):
         t = "s.telefono," if tel else ""
         return run(f"""SELECT p.id_prestamo, CONCAT(s.nombre,' ',s.apellido) socio, {t} l.titulo, e.codigo_inventario,
@@ -179,7 +180,7 @@ def create_app():
             socios=n("SELECT COUNT(*) n FROM socios WHERE estado='Habilitado'"),
             vencidos_lista=vencidos(5))
 
-    # ---------- Catálogo (CU02, CU03, CU04) ----------
+    #  Catálogo (CU02, CU03, CU04)
     @app.get("/api/libros")
     @auth()
     def libros_get():
@@ -243,7 +244,7 @@ def create_app():
                 raise Bad(f"Solo se puede dar de baja un ejemplar disponible (estado actual: {r['e']})", 409)
         audit(f"baja ejemplar id={i}"); return jsonify(ok=True)
 
-    # ---------- Socios (CU07) ----------
+    # Socios (CU07) 
     @app.get("/api/socios")
     @auth()
     def socios_get():  # el Colaborador no recibe teléfono ni email (minimización de datos personales)
@@ -289,7 +290,7 @@ def create_app():
         return jsonify(run("""SELECT p.*, l.titulo FROM prestamos p JOIN ejemplares e ON e.id_ejemplar=p.id_ejemplar
             JOIN libros l ON l.id_libro=e.id_libro WHERE p.id_socio=%s ORDER BY p.fecha_salida DESC""", (i,)))
 
-    # ---------- Préstamos, devoluciones y avisos (CU05, CU06, CU08, CU09) ----------
+    # Préstamos, devoluciones y avisos (CU05, CU06, CU08, CU09)
     @app.get("/api/prestamos")
     @auth()
     def prestamos_get():

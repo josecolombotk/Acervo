@@ -1,4 +1,3 @@
-"""Reglas de negocio y validaciones puras (sin base de datos): fáciles de probar con pruebas unitarias."""
 import re
 from datetime import date, datetime, timedelta
 

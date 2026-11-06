@@ -104,6 +104,26 @@ Las pruebas unitarias no requieren MySQL.
 
 Las pruebas de integración requieren MySQL iniciado y utilizan la base de datos `acervo_test`.
 
+## Usuarios de prueba
+
+Al ejecutar `python init_db.py`, se crean dos usuarios:
+
+| Usuario | Rol |
+|---|---|
+| encargada | Bibliotecaria |
+| colaborador | Colaborador |
+
+Las contraseñas se generan aleatoriamente y se muestran en la terminal durante la inicialización.
+
+Para establecer contraseñas manualmente, configurar antes de ejecutar `init_db.py`:
+
+```text
+ACERVO_ADMIN_PASS=contraseña_administradora
+ACERVO_COLAB_PASS=contraseña_colaborador
+```
+
+Guardar las credenciales generadas o configuradas. No se vuelven a mostrar automáticamente.
+
 ## Endpoints principales
 
 - `POST /api/login`

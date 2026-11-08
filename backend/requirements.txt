@@ -2,3 +2,4 @@ Flask>=3.0
 PyMySQL>=1.1
 pytest>=8.0
 gunicorn>=22.0; sys_platform != "win32"
+python-dotenv>=1.0

@@ -185,8 +185,8 @@ def create_app():
     @auth()
     def libros_get():
         q = f"%{request.args.get('q', '')[:100]}%"
-        return jsonify(run("""SELECT l.*, COUNT(e.id_ejemplar) ejemplares, IFNULL(SUM(e.estado_disponibilidad='Disponible'),0) disponibles
-            FROM libros l LEFT JOIN ejemplares e ON e.id_libro=l.id_libro AND e.estado_disponibilidad<>'Inactivo'
+        return jsonify(run("""SELECT l.*, COUNT(e.id_ejemplar) ejemplares, IFNULL(SUM(e.estado_disponibilidad='Disponible'),0) disponibles,
+            GROUP_CONCAT(CASE WHEN e.estado_disponibilidad='Disponible' THEN e.codigo_inventario END ORDER BY e.codigo_inventario SEPARATOR ', ') codigos            FROM libros l LEFT JOIN ejemplares e ON e.id_libro=l.id_libro AND e.estado_disponibilidad<>'Inactivo'
             WHERE l.activo=1 AND (l.titulo LIKE %s OR l.autor LIKE %s OR l.categoria LIKE %s)
             GROUP BY l.id_libro ORDER BY l.titulo LIMIT 500""", (q, q, q)))
 

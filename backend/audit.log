@@ -162,3 +162,61 @@
 2026-11-08 15:12:39,076 uid=2 rol=Colaborador ip=127.0.0.1 logout
 2026-11-08 15:12:51,594 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
 2026-11-08 15:25:36,261 uid=1 rol=Bibliotecaria ip=127.0.0.1 logout
+2026-11-08 19:18:27,606 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 19:18:27,640 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=5
+2026-11-08 19:18:27,725 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=5 socio=5 ejemplar=5
+2026-11-08 19:18:27,792 uid=1 rol=Bibliotecaria ip=127.0.0.1 devolución préstamo id=5
+2026-11-08 19:18:27,844 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=7
+2026-11-08 19:18:27,861 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=8
+2026-11-08 19:18:28,029 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 19:18:28,031 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 19:18:28,084 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=6 socio=8 ejemplar=13
+2026-11-08 19:18:28,256 uid=2 rol=Colaborador ip=127.0.0.1 login correcto
+2026-11-08 19:18:28,436 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:18:28,597 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:18:28,735 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:18:28,876 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:18:29,015 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:21:56,614 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 19:21:56,630 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=5
+2026-11-08 19:21:56,723 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=5 socio=5 ejemplar=5
+2026-11-08 19:21:56,796 uid=1 rol=Bibliotecaria ip=127.0.0.1 devolución préstamo id=5
+2026-11-08 19:21:56,825 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=7
+2026-11-08 19:21:56,839 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=8
+2026-11-08 19:21:57,006 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 19:21:57,019 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 19:21:57,056 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=6 socio=7 ejemplar=13
+2026-11-08 19:21:57,218 uid=2 rol=Colaborador ip=127.0.0.1 login correcto
+2026-11-08 19:21:57,397 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:21:57,533 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:21:57,672 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:21:57,820 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:21:57,957 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 19:47:55,757 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:48:03,184 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:48:05,158 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:48:10,890 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:48:12,823 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:54:49,680 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:55:04,712 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:55:41,168 uid=None rol=None ip=127.0.0.1 login fallido usuario='encargada'
+2026-11-08 19:56:32,777 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 20:02:24,621 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta libro id=6 ejemplares=2
+2026-11-08 20:04:27,982 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=5 socio=4 ejemplar=5
+2026-11-08 20:30:00,187 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 20:34:37,828 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta libro id=7 ejemplares=0
+2026-11-08 21:09:55,399 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 21:09:55,433 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=5
+2026-11-08 21:09:55,518 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=5 socio=5 ejemplar=5
+2026-11-08 21:09:55,585 uid=1 rol=Bibliotecaria ip=127.0.0.1 devolución préstamo id=5
+2026-11-08 21:09:55,612 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=7
+2026-11-08 21:09:55,628 uid=1 rol=Bibliotecaria ip=127.0.0.1 alta socio id=8
+2026-11-08 21:09:55,805 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 21:09:55,807 uid=1 rol=Bibliotecaria ip=127.0.0.1 login correcto
+2026-11-08 21:09:55,890 uid=1 rol=Bibliotecaria ip=127.0.0.1 préstamo id=6 socio=8 ejemplar=13
+2026-11-08 21:09:56,078 uid=2 rol=Colaborador ip=127.0.0.1 login correcto
+2026-11-08 21:09:56,270 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 21:09:56,414 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 21:09:56,556 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 21:09:56,698 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'
+2026-11-08 21:09:56,836 uid=None rol=None ip=127.0.0.1 login fallido usuario='intruso'

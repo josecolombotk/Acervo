@@ -433,73 +433,33 @@ function Socios({ isB, toast, abrirNuevo }) {
   </>);
 }
 
-// Ventana de aviso centrada con ícono (por ejemplo, "No hay ejemplares disponibles").
-function AlertModal({ title, children, onClose }) {
-  useEffect(() => {
-    const esc = e => e.key === 'Escape' && onClose();
-    window.addEventListener('keydown', esc);
-    return () => window.removeEventListener('keydown', esc);
-  }, [onClose]);
-
-  return (<div className="ov" onClick={e => e.target === e.currentTarget && onClose()}>
-    <div className="md alert" role="alertdialog" aria-modal="true" aria-labelledby="alert-t">
-      <div className="alert-ic" aria-hidden="true">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" /><line x1="12" y1="7" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
-        </svg>
-      </div>
-      <h3 id="alert-t">{title}</h3>
-      <div className="alert-tx">{children}</div>
-      <button className="btn" autoFocus onClick={onClose}>Aceptar</button>
-    </div>
-  </div>);
-}
-
 function Prestamos({ isB, toast, aviso }) {
   const [dni, setDni] = useState('');
-  const [idLibro, setIdLibro] = useState('');
   const [cod, setCod] = useState('');
   const [rows, setRows] = useState([]);
-  const [libros, setLibros] = useState([]);
-  const [sinStock, setSinStock] = useState(null);
 
   const load = useCallback(() => api('/prestamos').then(setRows).catch(x => toast(x.message)), []);
-  const loadLibros = useCallback(() => api('/libros?q=').then(setLibros).catch(x => toast(x.message)), []);
 
   useEffect(() => {
     load();
-    loadLibros();
-  }, [load, loadLibros]);
-
-  const libro = libros.find(l => String(l.id_libro) === idLibro);
-  const codigos = libro?.codigos ? libro.codigos.split(', ') : [];
-
-  const elegirLibro = id => {
-    setIdLibro(id);
-    const l = libros.find(x => String(x.id_libro) === id);
-    const disp = l?.codigos ? l.codigos.split(', ') : [];
-    setCod(disp.length === 1 ? disp[0] : '');
-    if (l && !disp.length) setSinStock(l);
-  };
+  }, [load]);
 
   const hoy = new Date();
   const v = new Date();
   v.setDate(v.getDate() + 15);
 
   const reg = async () => {
-    if (!dni.trim() || !idLibro || !cod) return toast('Ingrese el DNI del socio, el libro y el código del ejemplar.');
+    if (!dni.trim() || !cod.trim()) return toast('Ingrese el DNI del socio y el código del ejemplar.');
 
     try {
       const r = await api('/prestamos', 'POST', { dni, codigo_inventario: cod });
       toast('Préstamo registrado. Vence ' + fmt(r.fecha_vencimiento));
       setDni('');
-      setIdLibro('');
       setCod('');
       load();
     } catch (x) {
       toast(x.message);
     }
-    loadLibros();   // los códigos disponibles cambian tras un préstamo (o si otro usuario prestó el ejemplar)
   };
 
   const dev = async p => {
@@ -509,7 +469,6 @@ function Prestamos({ isB, toast, aviso }) {
       await api(`/prestamos/${p.id_prestamo}/devolucion`, 'POST');
       toast('Devolución registrada');
       load();
-      loadLibros();
     } catch (x) {
       toast(x.message);
     }
@@ -522,28 +481,14 @@ function Prestamos({ isB, toast, aviso }) {
     <h2>Préstamos</h2>
 
     <div className="panel" style={{ marginTop: 12 }}>
-      <div className="form f3">
+      <div className="form">
         <div>
-          <label htmlFor="p-dni">DNI del socio</label>
-          <input id="p-dni" value={dni} placeholder="Sin puntos" onChange={e => setDni(e.target.value)} />
+          <label>DNI del socio</label>
+          <input value={dni} onChange={e => setDni(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="p-libro">Título del libro</label>
-          <select id="p-libro" value={idLibro} onChange={e => elegirLibro(e.target.value)}>
-            <option value="">Seleccionar libro…</option>
-            {libros.map(l => (
-              <option key={l.id_libro} value={l.id_libro}>
-                {l.titulo} — {l.autor} ({l.disponibles ? `${l.disponibles} disp.` : 'sin disponibles'})
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="p-cod">Código del ejemplar</label>
-          <select id="p-cod" value={cod} disabled={!codigos.length} onChange={e => setCod(e.target.value)}>
-            <option value="">{!idLibro ? 'Primero elija un libro' : codigos.length ? 'Seleccionar código…' : 'Sin ejemplares disponibles'}</option>
-            {codigos.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
+          <label>Código del ejemplar</label>
+          <input value={cod} placeholder="Ej: L0002-1" onChange={e => setCod(e.target.value)} />
         </div>
       </div>
 
@@ -587,13 +532,6 @@ function Prestamos({ isB, toast, aviso }) {
         </tbody>
       </table>
     </div>
-
-    {sinStock && (
-      <AlertModal title="No hay ejemplares disponibles" onClose={() => setSinStock(null)}>
-        Todas las copias de «{sinStock.titulo}» están prestadas en este momento.
-        Elija otro libro o espere a que se registre una devolución.
-      </AlertModal>
-    )}
   </>);
 }
 

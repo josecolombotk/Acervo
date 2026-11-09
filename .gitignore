@@ -22,7 +22,3 @@ __pycache__/
 .env*
 !.env.example
 
-# Registro de auditoría (datos de operación, no se versiona)
-backend/audit.log
-*.log
-*.patch
